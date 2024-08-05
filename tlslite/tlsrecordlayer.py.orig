@@ -942,12 +942,6 @@ class TLSRecordLayer:
                     plaintext = plaintext[self._readState.encContext.block_size : ]
                 bytes = stringToBytes(plaintext)
 
-                if len(b) == 0:
-                    for result in self._sendError(\
-                            AlertDescription.decryption_failed,
-                            "No data left after decryption and IV removal"):
-                        yield result
-
                 #Check padding
                 paddingGood = True
                 paddingLength = bytes[-1]
